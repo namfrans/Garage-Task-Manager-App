@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">Garage Task Manager</string>
+    <string name="app_desc_text">Mobile application that operates both on and offline, it helps the manager create and assign tasks to his employees. The manager is enabled to keep track of his employees on and offsite.</string>
+    <string name="app_name_string">MR. Valentine’s Garage Management App</string>
+    <string name="get_started">Get Started</string>
+
+    <string name="good_day">GOOD DAY</string>
+    <string name="login_to_get_started">Enter your login details to get started.</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="name">FullName</string>
+    <string name="add_image">Upload image</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="or_sign_in">or Sign in</string>
+    <string name="select_user">Select user</string>
+    <string name="create_account">Create Account</string>
+    <string name="or">or</string>
+    <string name="work_details">Work Details</string>
+    <string name="department">Department</string>
+
+    <string-array name="departments">
+        <item>Vehicles</item>
+        <item>Trailers</item>
+    </string-array>
+    <string-array name="roles">
+        <item>Manager</item>
+        <item>Electrician</item>
+        <item>Mechanic</item>
+    </string-array>
+    <string-array name="workers">
+        <item>Employee</item>
+        <item>Employee 1</item>
+        <item>Employee 2</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="manage_accounts">Manage Accounts</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_activity_settings2">SettingsActivity2</string>
+    <string name="title_activity_emp_settings">EmpSettingsActivity</string>
+</resources>

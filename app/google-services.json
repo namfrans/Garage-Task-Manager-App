@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "927697273825",
+    "project_id": "garage-task-manager",
+    "storage_bucket": "garage-task-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927697273825:android:cee64d2161dcca12d288a0",
+        "android_client_info": {
+          "package_name": "com.example.valentinesgaragetaskmanagementapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "927697273825-fdorr88rj8mm4q86588tf61g42c8omm7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwDpQnMzf6RDgeJnvAtqYQk1A8Mi7BU-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "927697273825-fdorr88rj8mm4q86588tf61g42c8omm7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
