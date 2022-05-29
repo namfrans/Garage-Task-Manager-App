@@ -13,12 +13,13 @@ investigate a case, his employees would play a blame game whereby each one would
 have expected it to be done by another employee. To solve this problem, Valentine
 requested a system that sees him out of this problem. Below are some of the key
 requirements:
-• Valentine or senior staff should be able to add a job, that is, car details that
+
+-Valentine or senior staff should be able to add a job, that is, car details that
 have to be worked on;
-• Upon finishing a task from a checklist, an employee who worked on a task
+-Upon finishing a task from a checklist, an employee who worked on a task
 should mark it as done and add additional comments if available. This allows
 Valentine to track tasks done by individuals and also ensures that all tasks were
 done before a vehicle leaves their garage;
-• Valentine should also be able to assign tasks on a job when he is away.
-• Generate reports of tasks done by individual employees on a daily or monthly
+-Valentine should also be able to assign tasks on a job when he is away.
+-Generate reports of tasks done by individual employees on a daily or monthly
 basis.
