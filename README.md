@@ -26,3 +26,19 @@ done before a vehicle leaves their garage;
 
 -Generate reports of tasks done by individual employees on a daily or monthly
 basis.
+
+TO DO LIST:
+
+-Use jetpack compose for naviagtion
+
+-Convert createTaskActivity to a dialogue box
+
+-Create a view task diologue activity.
+
+-Add a complete task functionality.
+
+-Add a manage account functionality on the admin account.
+
+-Create analytics and reports depending on the employees operation.
+
+-Improve the auntication and register account process.
