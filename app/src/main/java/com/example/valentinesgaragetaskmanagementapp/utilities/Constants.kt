@@ -12,14 +12,11 @@ class Constants {
         const val KEY_IS_SIGNED_IN = "isSignedIn"
         const val KEY_USER_ID = "userId"
         const val KEY_IMAGE = "image"
-        const val KEY_USER = "user"
         const val KEY_FCM_TOKEN = "fcmToken"
         const val KEY_COLLECTION_TASK = "tasks"
         const val KEY_RECEIVER = "receiver"
         const val KEY_RECEIVER_IMG = "receiverImg"
         const val KEY_TASK = "task"
         const val KEY_DESCRIPTION = "description"
-        const val KEY_START_TIME = "start"
-        const val KEY_END_TIME = "end"
     }
 }

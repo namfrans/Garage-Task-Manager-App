@@ -17,10 +17,9 @@ import kotlin.collections.ArrayList
 
 class CreateTaskActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateTaskBinding
-    var employeeList: MutableList<String> = ArrayList<String>()
-    val users: MutableList<User> = ArrayList<User>()
+    private var employeeList: MutableList<String> = ArrayList()
+    private val users: MutableList<User> = ArrayList()
     private lateinit var image:String
-    lateinit var selected: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,18 +51,18 @@ class CreateTaskActivity : AppCompatActivity() {
         loading(true)
         val db = FirebaseFirestore.getInstance()
         val task = HashMap<String, Any>()
-        task.put(Constants.KEY_TASK, binding.task.text.toString())
-        task.put(Constants.KEY_DESCRIPTION, binding.description.text.toString())
-        task.put(Constants.KEY_RECEIVER, binding.assignedTo.selectedItem.toString())
+        task[Constants.KEY_TASK] = binding.task.text.toString()
+        task[Constants.KEY_DESCRIPTION] = binding.description.text.toString()
+        task[Constants.KEY_RECEIVER] = binding.assignedTo.selectedItem.toString()
         for (user in users){
-            if (user.name.equals(binding.assignedTo.selectedItem.toString())){
+            if (user.name == binding.assignedTo.selectedItem.toString()){
                 image = user.image
             }
         }
-        task.put(Constants.KEY_RECEIVER_IMG, image)
+        task[Constants.KEY_RECEIVER_IMG] = image
         db.collection(Constants.KEY_COLLECTION_TASK)
             .add(task)
-            .addOnSuccessListener { documentReference ->
+            .addOnSuccessListener {
                 loading(false)
                 val intent = Intent(applicationContext, ManagerHomeActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -75,17 +74,17 @@ class CreateTaskActivity : AppCompatActivity() {
             }
     }
     private fun isValidTaskDetails(): Boolean {
-        if (binding.task.toString().trim().isEmpty()){
+        return if (binding.task.toString().trim().isEmpty()){
             showToast("Enter a task.")
-            return false
+            false
         } else if (binding.description.text.toString().trim().isEmpty()){
             showToast("Specify the task description.")
-            return false
+            false
         }  else if (binding.assignedTo.selectedItem.toString().trim().isEmpty()){
             showToast("Select who is responsible for the task")
-            return false
+            false
         }else{
-            return true
+            true
         }
     }
     private fun getUsers(){
@@ -112,8 +111,8 @@ class CreateTaskActivity : AppCompatActivity() {
                     }
             }
             .addOnCompleteListener{
-                var empList = employeeList.toList()
-                val empAdapter = ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, empList)
+                val empList = employeeList.toList()
+                val empAdapter = ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, empList)
                 binding.assignedTo.adapter = empAdapter
                 binding.assignedTo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {

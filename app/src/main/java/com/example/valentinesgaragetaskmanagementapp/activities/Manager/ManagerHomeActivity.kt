@@ -4,24 +4,17 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
-import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.valentinesgaragetaskmanagementapp.R
 import com.example.valentinesgaragetaskmanagementapp.activities.SignInActivity
 import com.example.valentinesgaragetaskmanagementapp.databinding.ActivityManagerHomeBinding
-import com.example.valentinesgaragetaskmanagementapp.models.User
 import com.example.valentinesgaragetaskmanagementapp.utilities.Constants
 import com.example.valentinesgaragetaskmanagementapp.utilities.PreferenceManager
-import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.messaging.FirebaseMessaging
 
 class ManagerHomeActivity : AppCompatActivity() {
@@ -42,7 +35,7 @@ class ManagerHomeActivity : AppCompatActivity() {
         //Set home selector
         bottomNavigationView.selectedItemId = R.id.managerHomeActivity
         //setOnClick listeners
-        bottomNavigationView.setOnItemSelectedListener() { menuItem: MenuItem ->
+        bottomNavigationView.setOnItemSelectedListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
                 R.id.tasksActivity -> {
                     startActivity(Intent(applicationContext, TasksActivity::class.java))
@@ -84,10 +77,10 @@ class ManagerHomeActivity : AppCompatActivity() {
     }
 
     private fun loadUserDetails() {
-        binding.textName.setText(preferenceManager.getString(Constants.KEY_NAME))
-        binding.textEmail.setText(preferenceManager.getString(Constants.KEY_EMAIL))
-        binding.textDepartment.setText(preferenceManager.getString(Constants.KEY_DEPARTMENT))
-        binding.textRole.setText(preferenceManager.getString(Constants.KEY_ROLE))
+        binding.textName.text = preferenceManager.getString(Constants.KEY_NAME)
+        binding.textEmail.text = preferenceManager.getString(Constants.KEY_EMAIL)
+        binding.textDepartment.text = preferenceManager.getString(Constants.KEY_DEPARTMENT)
+        binding.textRole.text = preferenceManager.getString(Constants.KEY_ROLE)
         val bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT)
         val bitmap = BitmapFactory.decodeByteArray( bytes, 0, bytes!!.size)
         binding.imageProfile.setImageBitmap(bitmap)

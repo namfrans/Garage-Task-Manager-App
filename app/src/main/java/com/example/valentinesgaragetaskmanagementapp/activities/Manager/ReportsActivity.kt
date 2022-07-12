@@ -1,11 +1,10 @@
 package com.example.valentinesgaragetaskmanagementapp.activities.Manager
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.example.valentinesgaragetaskmanagementapp.R
-import com.example.valentinesgaragetaskmanagementapp.activities.Employee.EmployeesActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ReportsActivity : AppCompatActivity() {
@@ -18,7 +17,7 @@ class ReportsActivity : AppCompatActivity() {
         //Set home selector
         bottomNavigationView.selectedItemId = R.id.reportsActivity
         //setOnClick listeners
-        bottomNavigationView.setOnItemSelectedListener() { menuItem: MenuItem ->
+        bottomNavigationView.setOnItemSelectedListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
                 R.id.tasksActivity -> {
                     startActivity(Intent(applicationContext, TasksActivity::class.java))

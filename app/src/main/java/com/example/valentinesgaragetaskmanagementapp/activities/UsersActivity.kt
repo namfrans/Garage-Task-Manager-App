@@ -1,7 +1,6 @@
 package com.example.valentinesgaragetaskmanagementapp.activities
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.valentinesgaragetaskmanagementapp.models.User
 import com.example.valentinesgaragetaskmanagementapp.utilities.Constants
@@ -25,7 +24,7 @@ class UsersActivity : AppCompatActivity() {
             .addOnCompleteListener { task: Task<QuerySnapshot?> ->
                 val currentUserId = preferenceManager.getString(Constants.KEY_USER_ID)
                 if (task.isSuccessful && task.result != null) {
-                    val users: MutableList<User> = ArrayList<User>()
+                    val users: MutableList<User> = ArrayList()
                     for (queryDocumentSnapshot in task.result!!) {
                         if (currentUserId == queryDocumentSnapshot.id) {
                             continue

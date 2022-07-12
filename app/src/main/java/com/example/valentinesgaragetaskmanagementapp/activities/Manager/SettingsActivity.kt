@@ -6,7 +6,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
 import com.example.valentinesgaragetaskmanagementapp.R
-import com.example.valentinesgaragetaskmanagementapp.activities.Employee.EmployeesActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SettingsActivity : AppCompatActivity() {
@@ -20,7 +19,7 @@ class SettingsActivity : AppCompatActivity() {
         //Set home selector
         bottomNavigationView.selectedItemId = R.id.settings
         //setOnClick listeners
-        bottomNavigationView.setOnItemSelectedListener() { menuItem: MenuItem ->
+        bottomNavigationView.setOnItemSelectedListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
                 R.id.tasksActivity -> {
                     startActivity(Intent(applicationContext, TasksActivity::class.java))

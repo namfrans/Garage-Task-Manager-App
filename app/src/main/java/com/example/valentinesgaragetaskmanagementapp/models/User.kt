@@ -2,7 +2,7 @@ package com.example.valentinesgaragetaskmanagementapp.models
 import kotlinx.serialization.Serializable
 
 @Serializable
-class User()  {
+class User {
     lateinit var name: String
     lateinit var email: String
     lateinit var department:String

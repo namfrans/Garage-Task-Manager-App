@@ -11,13 +11,13 @@ class PreferenceManager() {
         sharedPreferences = context.getSharedPreferences(Constants.KEY_PREFERENCES_NAME, Context.MODE_PRIVATE)
     }
 
-    fun putBoolean(key: String?, value: Boolean?) {
+    fun putBoolean() {
         val editor = sharedPreferences!!.edit()
         //editor.putBoolean(key, value!!)
         editor.apply()
     }
 
-    fun getBoolean(key: String?): Boolean? {
+    fun getBoolean(key: String?): Boolean {
         return sharedPreferences!!.getBoolean(key, false)
     }
 

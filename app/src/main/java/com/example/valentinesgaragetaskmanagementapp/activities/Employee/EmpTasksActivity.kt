@@ -1,20 +1,16 @@
 package com.example.valentinesgaragetaskmanagementapp.activities.Employee
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.valentinesgaragetaskmanagementapp.R
-import com.example.valentinesgaragetaskmanagementapp.activities.Manager.ManagerHomeActivity
-import com.example.valentinesgaragetaskmanagementapp.activities.Manager.ReportsActivity
-import com.example.valentinesgaragetaskmanagementapp.activities.Manager.SettingsActivity
 import com.example.valentinesgaragetaskmanagementapp.adapters.TasksAdapter
 import com.example.valentinesgaragetaskmanagementapp.databinding.ActivityEmpTasksBinding
-import com.example.valentinesgaragetaskmanagementapp.databinding.ActivityTasksBinding
 import com.example.valentinesgaragetaskmanagementapp.models.Task
 import com.example.valentinesgaragetaskmanagementapp.utilities.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -27,6 +23,7 @@ class EmpTasksActivity : AppCompatActivity() {
     private lateinit var taskArrayList: ArrayList<Task>
     private lateinit var tasksAdapter: TasksAdapter
     private lateinit var db:FirebaseFirestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_emp_tasks)
@@ -40,14 +37,14 @@ class EmpTasksActivity : AppCompatActivity() {
         taskArrayList = arrayListOf()
         tasksAdapter = TasksAdapter(taskArrayList)
         recyclerView.adapter = tasksAdapter
-        EventChangeListener()
+        eventChangeListener()
 
         //Initialize
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav)
         //Set home selector
         bottomNavigationView.selectedItemId = R.id.empTasksActivity
         //setOnClick listeners
-        bottomNavigationView.setOnItemSelectedListener() { menuItem: MenuItem ->
+        bottomNavigationView.setOnItemSelectedListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
                 R.id.empTasksActivity -> {
                     return@setOnItemSelectedListener true
@@ -76,7 +73,7 @@ class EmpTasksActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
 
-    private fun EventChangeListener() {
+    private fun eventChangeListener() {
         loading(true)
         db = FirebaseFirestore.getInstance()
         db.collection("tasks").orderBy("task", Query.Direction.ASCENDING).

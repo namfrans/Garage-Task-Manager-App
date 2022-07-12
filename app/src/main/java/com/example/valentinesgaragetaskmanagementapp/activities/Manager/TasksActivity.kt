@@ -12,12 +12,9 @@ import com.example.valentinesgaragetaskmanagementapp.R
 import com.example.valentinesgaragetaskmanagementapp.adapters.TasksAdapter
 import com.example.valentinesgaragetaskmanagementapp.databinding.ActivityTasksBinding
 import com.example.valentinesgaragetaskmanagementapp.models.Task
-import com.example.valentinesgaragetaskmanagementapp.utilities.Constants
 import com.example.valentinesgaragetaskmanagementapp.utilities.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.*
-import com.google.firebase.firestore.auth.User
-import com.google.firebase.firestore.ktx.toObject
 
 class TasksActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTasksBinding
@@ -40,14 +37,14 @@ class TasksActivity : AppCompatActivity() {
         taskArrayList = arrayListOf()
         tasksAdapter = TasksAdapter(taskArrayList)
         recyclerView.adapter = tasksAdapter
-        EventChangeListener()
+        eventChangeListener()
 
         //Initialize
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav)
         //Set home selector
         bottomNavigationView.selectedItemId = R.id.tasksActivity
         //setOnClick listeners
-        bottomNavigationView.setOnItemSelectedListener() { menuItem: MenuItem ->
+        bottomNavigationView.setOnItemSelectedListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
                 R.id.tasksActivity -> {
                     return@setOnItemSelectedListener true
@@ -74,12 +71,15 @@ class TasksActivity : AppCompatActivity() {
     private fun showToast(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
-    private fun EventChangeListener() {
+    private fun eventChangeListener() {
         loading(true)
         db = FirebaseFirestore.getInstance()
         db.collection("tasks").orderBy("task", Query.Direction.ASCENDING).
                 addSnapshotListener(object : EventListener<QuerySnapshot>{
-                    override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?, ) {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?,
+                    ) {
                         if (error != null){
                             showToast(error.message.toString())
                             return

@@ -51,7 +51,7 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    fun signIn(){
+    private fun signIn(){
         loading(true)
         val db = FirebaseFirestore.getInstance()
         db.collection(Constants.KEY_COLLECTION_USERS)
@@ -62,7 +62,7 @@ class SignInActivity : AppCompatActivity() {
                 if (task.isSuccessful && task.result != null && task.result!!.documents.size > 0
                 ) {
                     val documentSnapshot = task.result!!.documents[0]
-                    preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true)
+                    preferenceManager.putBoolean()
                     preferenceManager.putString(Constants.KEY_USER_ID, documentSnapshot.id)
                     preferenceManager.putString(Constants.KEY_NAME, documentSnapshot.getString(Constants.KEY_NAME))
                     preferenceManager.putString(Constants.KEY_IMAGE, documentSnapshot.getString(Constants.KEY_IMAGE))
@@ -101,17 +101,17 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun isValidSignInDetails(): Boolean {
-        if (binding.inputEmail.text.toString().trim().isEmpty()) {
+        return if (binding.inputEmail.text.toString().trim().isEmpty()) {
             showToast("Enter your email.")
-            return false
+            false
         } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.inputEmail.text.toString()).matches()) {
             showToast("Enter a valid email.")
-            return false
+            false
         } else if (binding.inputPassword.text.toString().trim().isEmpty()) {
             showToast("Enter your password.")
-            return false
+            false
         } else {
-            return true
+            true
         }
     }
 }

@@ -18,7 +18,6 @@ import com.example.valentinesgaragetaskmanagementapp.R
 import com.example.valentinesgaragetaskmanagementapp.activities.Employee.EmployeesActivity
 import com.example.valentinesgaragetaskmanagementapp.activities.Manager.ManagerHomeActivity
 import com.example.valentinesgaragetaskmanagementapp.databinding.ActivitySignUpBinding
-import com.example.valentinesgaragetaskmanagementapp.models.User
 import com.example.valentinesgaragetaskmanagementapp.utilities.Constants
 import com.example.valentinesgaragetaskmanagementapp.utilities.PreferenceManager
 import com.google.firebase.firestore.FirebaseFirestore
@@ -44,15 +43,15 @@ class SignUpActivity : AppCompatActivity() {
         var selected: String
         val departmentList = listOf("Department","HOD", "Vehicles", "Trailers")
         val roleList = listOf("Role","Manager", "Electrician", "Mechanic")
-        val deptAdapter = ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, departmentList)
-        val rolesAdapter = ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, roleList)
+        val deptAdapter = ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, departmentList)
+        val rolesAdapter = ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, roleList)
         binding.spDepartment.adapter = deptAdapter
         binding.spRole.adapter = rolesAdapter
 
         binding.spDepartment.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(adapterView: AdapterView<*>, view: View?, position: Int, id: Long) {
-                selected = adapterView?.getItemAtPosition(position).toString()
-                if (selected.equals("HOD")){
+                selected = adapterView.getItemAtPosition(position).toString()
+                if (selected == "HOD"){
                     binding.spRole.setSelection(1,true)
                 }
             }
@@ -63,7 +62,7 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.spRole.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(adapterView: AdapterView<*>, view: View?, position: Int, id: Long) {
-                selected = adapterView?.getItemAtPosition(position).toString()
+                selected = adapterView.getItemAtPosition(position).toString()
                 if (binding.spRole.selectedItem.equals("Manager")){
                     binding.spDepartment.setSelection(1,true)
                 }
@@ -100,17 +99,17 @@ class SignUpActivity : AppCompatActivity() {
         loading(true)
         val db = FirebaseFirestore.getInstance()
         val user = HashMap<String, Any>()
-        user.put(Constants.KEY_NAME, binding.inputName.text.toString())
-        user.put(Constants.KEY_EMAIL, binding.inputEmail.text.toString())
-        user.put(Constants.KEY_PASSWORD, binding.inputPassword.text.toString())
-        user.put(Constants.KEY_DEPARTMENT, binding.spDepartment.selectedItem.toString())
-        user.put(Constants.KEY_ROLE, binding.spRole.selectedItem.toString())
-        user.put(Constants.KEY_IMAGE, encodedImage!!)
+        user[Constants.KEY_NAME] = binding.inputName.text.toString()
+        user[Constants.KEY_EMAIL] = binding.inputEmail.text.toString()
+        user[Constants.KEY_PASSWORD] = binding.inputPassword.text.toString()
+        user[Constants.KEY_DEPARTMENT] = binding.spDepartment.selectedItem.toString()
+        user[Constants.KEY_ROLE] = binding.spRole.selectedItem.toString()
+        user[Constants.KEY_IMAGE] = encodedImage!!
         db.collection(Constants.KEY_COLLECTION_USERS)
             .add(user)
             .addOnSuccessListener { documentReference ->
                 loading(false)
-                preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true)
+                preferenceManager.putBoolean()
                 preferenceManager.putString(Constants.KEY_USER_ID, documentReference.id)
                 preferenceManager.putString(Constants.KEY_NAME, binding.inputName.text.toString())
                 preferenceManager.putString(Constants.KEY_EMAIL, binding.inputEmail.text.toString())
@@ -118,7 +117,7 @@ class SignUpActivity : AppCompatActivity() {
                 preferenceManager.putString(Constants.KEY_ROLE, binding.spRole.selectedItem.toString())
                 preferenceManager.putString(Constants.KEY_IMAGE, encodedImage)
                 //Change this later
-                if (binding.spDepartment.selectedItem.toString().equals("HOD")){
+                if (binding.spDepartment.selectedItem.toString() == "HOD"){
                     val intent = Intent(applicationContext, ManagerHomeActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     startActivity(intent)
@@ -153,7 +152,7 @@ class SignUpActivity : AppCompatActivity() {
                     val bitmap = BitmapFactory.decodeStream(inputStream)
                     binding.imageProfile.setImageBitmap(bitmap)
                     binding.textAddImage.visibility = View.GONE
-                    encodedImage = encodeImage(bitmap)!!
+                    encodedImage = encodeImage(bitmap)
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()
                 }
@@ -180,13 +179,13 @@ class SignUpActivity : AppCompatActivity() {
         }else if (binding.inputConfirmPassword.text.toString().trim().isEmpty()){
             showToast("Confirm your password")
             return false
-        }else if (!binding.inputPassword.text.toString().equals(binding.inputConfirmPassword.text.toString())){
+        }else if (binding.inputPassword.text.toString() != binding.inputConfirmPassword.text.toString()){
             showToast("Your passwords must be the same")
             return false
-        }else if(binding.spDepartment.selectedItem.toString().equals("Department")){
+        }else if(binding.spDepartment.selectedItem.toString() == "Department"){
             showToast("Select your department.")
             return false
-        }else if (binding.spRole.selectedItem.toString().equals("Role")) {
+        }else if (binding.spRole.selectedItem.toString() == "Role") {
             showToast("Select your role.")
             return false
         }else{
